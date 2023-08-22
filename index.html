@@ -53,6 +53,11 @@
         background-repeat: no-repeat; 背景圖不重複
         background-size: cover; 背景圖尺寸填滿
         */
+
+        .footer-text {
+            font-size: 13px;
+        }
+
         .text-color {
             color: #877c75;
         }
@@ -84,7 +89,7 @@
             width: 5px;
             /*background-color: #877c75;*/
             /*漸層色*/
-            background-image: linear-gradient(180deg, #877c7505, #877c75);
+            background-image: linear-gradient(180deg, #877c75, #877c7505);
             /* 位移到中間，但沒有對準中最中間 */
             left: 50%;
             /* 用translateX(-50%)再調回來一半 */
@@ -139,7 +144,7 @@
         }*/
 
         .s09_text {
-            background-color: #ffffffbb;
+            background-color: #ffffffb0;
             border-radius: 15px;
             color: #715e5e;
         }
@@ -150,7 +155,16 @@
          z-index: 10; 把文字移到最前面 最上面的圖層 */
         @media screen and (max-width: 768px) {
 
-            .s05_text,
+            .s05_text {
+                z-index: 10;
+                background-color: rgba(0, 0, 0, 0.4);
+                margin: 15px;
+                padding: 15px;
+                border-radius: 15px;
+                color: #FFF;
+                transform: translateX(4%);
+            }
+
             .s07_text {
                 z-index: 10;
                 background-color: rgba(0, 0, 0, 0.4);
@@ -158,6 +172,7 @@
                 padding: 15px;
                 border-radius: 15px;
                 color: #FFF;
+                transform: translateX(-5%);
             }
         }
 
@@ -195,7 +210,7 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <i class="fa-solid fa-mug-saucer text-light me-1"></i>
-                        <b>Coffee Project 咖啡計畫</b>
+                        <b>Coffee Project</b>
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -352,37 +367,37 @@
             <div class="carousel-inner">
                 <!-- style css特別設定(只出現在這裡所以不設在css)-->
                 <div class="carousel-item active bg-cover"
-                    style="background-image: url(images/coffee001.jpg); height: 600px;">
+                    style="background-image: url(images/coffee001.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
                     </div>
                 </div>
-                <div class="carousel-item bg-cover" style="background-image: url(images/coffee002.jpg); height: 600px;">
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee002.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
                     </div>
                 </div>
-                <div class="carousel-item bg-cover" style="background-image: url(images/coffee003.jpg); height: 600px;">
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee003.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
                     </div>
                 </div>
-                <div class="carousel-item bg-cover" style="background-image: url(images/coffee004.jpg); height: 600px;">
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee004.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
                     </div>
                 </div>
-                <div class="carousel-item bg-cover" style="background-image: url(images/coffee005.jpg); height: 600px;">
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee005.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
                     </div>
                 </div>
-                <div class="carousel-item bg-cover" style="background-image: url(images/coffee006.jpg); height: 600px;">
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee006.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
                         <!--<h4>title</h4>
                         <p>content</p>-->
@@ -407,9 +422,9 @@
     <section class="bg-color">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 text-center p-5">
+                <div class="col-md-4 text-center text-nowrap p-5">
                     <!-- fa-3x 放大3倍(數字改掉就放大幾倍)，my-3 上下(Y軸)推-->
-                    <i class="fa-solid fa-mug-hot fa-5x text-white"></i>
+                    <i class="fa-solid fa-mug-hot fa-5x text-white ps-3"></i>
                     <div class="d-none d-md-block">
                         <h2 class="my-3 fw-500 text-white">
                             Coffee<br />
@@ -448,7 +463,7 @@
     mt-3 margin-top 上面推3
     my-3 上下各推3
 -->
-    <section style="position: relative;">
+    <section class="container-fluid" style="position: relative;">
         <div class="row">
             <!-- s05_img 設定手機板圖片右邊貼齊 -->
             <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
@@ -459,7 +474,7 @@
         </div>
         <div class="container text-color">
             <!-- justify-content-end 文字區塊靠右 -->
-            <div class="row justify-content-end mt-3">
+            <div class="row justify-content-end p-3">
                 <!-- s05_text 設定手機板文字要在圖片上面-->
                 <div class="col-md-7 s05_text">
                     <h4 class="fw-700">Coffee Project 品牌介紹</h4>
@@ -487,7 +502,7 @@
     me-3 往右邊推3 
     d-flex -->
     <section>
-        <div class="container text-color my-3">
+        <div class="container text-color px-4 py-3">
             <div class="display-5 text-center text-color2 fw-900 mb-3">服務介紹</div>
             <div class="row">
                 <div class="col-md-6">
@@ -537,17 +552,17 @@
     </section>
 
     <!-- s07 付款方式 搭配圖片 -->
-    <section style="position: relative;">
+    <section class="container-fluid" style="position: relative;">
         <div class="container">
-            <div class="row">
-                <div class="col-md-7 s07_text text-color2 mt-3">
+            <div class="row p-3">
+                <div class="col-md-7 s07_text text-color2">
                     <dl class="row">
                         <h3 class="fw-700 mb-3">現場付款 & 線上預訂</h3>
-                        <dt class="col-sm-3">現金</dt>
+                        <dt class="col-sm-3 text-nowrap">．現金</dt>
                         <dd class="col-sm-9">現場付款除了台幣之外，接受部分外幣，例如：美金、日幣。</dd>
-                        <dt class="col-sm-3">信用卡</dt>
+                        <dt class="col-sm-3 text-nowrap">．信用卡</dt>
                         <dd class="col-sm-9">現場付款接受台灣以及海外發行的信用卡。</dd>
-                        <dt class="col-sm-3">行動支付</dt>
+                        <dt class="col-sm-3 text-nowrap">．行動支付</dt>
                         <dd class="col-sm-9">
                             現場付款接受的行動支付種類有：<br />
                             apple pay<br />
@@ -555,7 +570,7 @@
                             line pay<br />
                             台灣pay···等各種行動支付，請現場確認。
                         </dd>
-                        <dt class="col-sm-3">轉帳匯款</dt>
+                        <dt class="col-sm-3 text-nowrap">．轉帳匯款</dt>
                         <dd class="col-sm-9">
                             目前線上預訂預先付款僅提供轉帳匯款方式，若要選擇其他付款方式請至店面付款。</dd>
                         <!--
@@ -584,26 +599,27 @@
     <!-- s08 google地圖 & 線上預訂表單 -->
     <section>
         <div class="container">
-            <div class="row mt-3">
+            <div class="row mt-3 align-items-center">
                 <div class="col-md-6">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14559.18077940822!2d120.59025416842438!3d24.178914429388207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693e1e5070a7a7%3A0xa462167a0845084d!2z6Lev5oCd576p5pWZ5aCC!5e0!3m2!1szh-TW!2stw!4v1692234812196!5m2!1szh-TW!2stw"
-                        width="100%" height="700" style="border:0;" allowfullscreen="" loading="lazy"
+                        width="100%" height="650" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-                <div class="col-md-6 text-color ps-4 py-3">
-                    <h3 class="fw-700 text-color2 text-nowrap mb-3">Coffee Project 線上預訂表單</h3>
+                <div class="col-md-6 text-color p-3">
+                    <h3 class="fw-700 text-color2 text-center mb-3">Coffee Project<br />
+                        線上預訂表單</h3>
                     <div class="mb-2">
                         <label for="" class="form-label">姓名</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="必填">
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">電話</label>
-                        <input type="phone" class="form-control">
+                        <input type="phone" class="form-control" placeholder="必填">
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">email</label>
-                        <input type="email" class="form-control">
+                        <input type="email" class="form-control" placeholder="必填">
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">品牌咖啡豆100g．數量：</label>
@@ -611,10 +627,6 @@
                     </div>
                     <div class="mb-2">
                         <label for="" class="form-label">品牌咖啡豆200g．數量：</label>
-                        <input type="number" class="form-control" min="0" max="10">
-                    </div>
-                    <div class="mb-2">
-                        <label for="" class="form-label">品牌咖啡濾掛包5入．數量：</label>
                         <input type="number" class="form-control" min="0" max="10">
                     </div>
                     <div class="mb-2">
@@ -632,6 +644,133 @@
                     <div class="text-end">
                         <a href="#" class="btn btn-outline-secondary text-color">取消</a>
                         <a href="#" class="btn btn-outline-secondary text-color">確認</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s12 計數器 -->
+    <section class="container-fluid py-4" style="position: relative;">
+        <div class="row">
+            <!-- s05_img 設定手機板圖片右邊貼齊 -->
+            <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
+                top: 0; 
+                bottom: 0; 
+                background-image: url(images/coffee011.jpg);">
+            </div>
+        </div>
+        <div class="container text-color py-5">
+            <div class="row justify-content-end p-3">
+                <div class="col-md-7 s05_text py-5">
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <h5>咖啡香氣</h5>
+                            <h1 class="fw-700 counter01">99</h1>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h5>座位舒適</h5>
+                            <h1 class="fw-700 counter02">99</h1>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h5>專業認證</h5>
+                            <h1 class="fw-700 counter03">99</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        s11 時間軸 Z字形排版 
+        img-fluid 圖片100%
+        align-items-center :bootstrap本身有flex可以直接下
+        flex-row-reverse :反向從右邊排序回來
+    -->
+    <section>
+        <div class="container p-5">
+            <h4 class="fw-700 text-center text-color2 pb-4">
+                Coffee Project 咖啡計畫<br />
+                品牌沿革
+            </h4>
+            <div class="time-line">
+                <div class="row align-items-center time-line-point p-3">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2023</h4>
+                            <p>NOW</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee012.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point p-3">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2022</h4>
+                            <p>咖啡計畫品牌第5間店面開幕</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee013.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center time-line-point p-3">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2020</h4>
+                            <p>咖啡計畫品牌第3間店面開幕</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee014.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point p-3">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2016</h4>
+                            <p>咖啡計畫品牌第2間店面開幕</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee015.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center time-line-point p-3">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2012</h4>
+                            <p>咖啡計畫品牌第1間店面開幕</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee016.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point p-3">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2010</h4>
+                            <p>咖啡計畫品牌成立</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee017.jpg); height: 200px;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -668,139 +807,13 @@
         </div>
     </section>
 
-    <!-- s12 計數器 -->
-    <section class="py-5" style="position: relative;">
-        <div class="row">
-            <!-- s05_img 設定手機板圖片右邊貼齊 -->
-            <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
-                top: 0; 
-                bottom: 0; 
-                background-image: url(images/coffee011.jpg);">
-            </div>
-        </div>
-        <div class="container text-color">
-            <div class="row justify-content-end mt-3">
-                <div class="col-md-7 s05_text py-5">
-                    <div class="row">
-                        <div class="col-4 text-center">
-                            <h5>咖啡香氣</h5>
-                            <h1 class="fw-700 counter01">99</h1>
-                        </div>
-                        <div class="col-4 text-center">
-                            <h5>座位舒適</h5>
-                            <h1 class="fw-700 counter02">99</h1>
-                        </div>
-                        <div class="col-4 text-center">
-                            <h5>專業認證</h5>
-                            <h1 class="fw-700 counter03">99</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 
-        s11 時間軸 Z字形排版 
-        img-fluid 圖片100%
-        align-items-center :bootstrap本身有flex可以直接下
-        flex-row-reverse :反向從右邊排序回來
-    -->
-    <section>
-        <div class="container p-5">
-            <h4 class="fw-700 text-center text-color2 pb-3">
-                Coffee Project 咖啡計畫品牌沿革
-            </h4>
-            <div class="time-line">
-                <div class="row align-items-center time-line-point">
-                    <div class="col-md-6 text-center text-color">
-                        <div class="mytext">
-                            <h4 class="fw-700">2023</h4>
-                            <p>NOW</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee012.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center flex-row-reverse time-line-point">
-                    <div class="col-md-6 text-center text-color2">
-                        <div class="mytext">
-                            <h4 class="fw-700">2022</h4>
-                            <p>咖啡計畫品牌第5間店面落成</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee013.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center time-line-point">
-                    <div class="col-md-6 text-center text-color">
-                        <div class="mytext">
-                            <h4 class="fw-700">2020</h4>
-                            <p>咖啡計畫品牌第3間店面落成</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee014.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center flex-row-reverse time-line-point">
-                    <div class="col-md-6 text-center text-color2">
-                        <div class="mytext">
-                            <h4 class="fw-700">2016</h4>
-                            <p>咖啡計畫品牌第2間店面落成</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee015.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center time-line-point">
-                    <div class="col-md-6 text-center text-color">
-                        <div class="mytext">
-                            <h4 class="fw-700">2012</h4>
-                            <p>咖啡計畫品牌第1間店面落成</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee016.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-                <div class="row align-items-center flex-row-reverse time-line-point">
-                    <div class="col-md-6 text-center text-color2">
-                        <div class="mytext">
-                            <h4 class="fw-700">2010</h4>
-                            <p>咖啡計畫品牌成立</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="myimage bg-cover rounded-5"
-                            style="background-image: url(images/coffee017.jpg); height: 200px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- s10 版權宣告 友善連結 -->
     <section>
-        <div class="container-fluid bg-color py-1">
-            <ul class="nav justify-content-center">
+        <div class="container-fluid bg-color p-3">
+            <ul class="nav justify-content-center align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link disabled text-white">
-                        <small>Copyright 2023 Coffee Project 咖啡計畫 All Rights Reserved.</small>
+                    <a class="nav-link disabled text-white text-nowrap footer-text">
+                        Copyright 2023 Coffee Project 咖啡計畫 All Rights Reserved.
                     </a>
                 </li>
                 <li class="nav-item">
