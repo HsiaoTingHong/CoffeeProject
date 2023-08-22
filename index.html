@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coffee Project 咖啡計畫</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon_io/site.webmanifest">
+    <style>
+        /*google font*/
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+
+        /*google font套用至body(整個網頁都使用字形)*/
+        .body {
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        /*自行設定class 例如 .fw-500字體厚度設定500
+        可以另存css檔案就可跟全部檔案共用*/
+        .fw-900 {
+            font-weight: 900;
+        }
+
+        .fw-700 {
+            font-weight: 700;
+        }
+
+        .fw-500 {
+            font-weight: 500;
+        }
+
+        .fw-400 {
+            font-weight: 400;
+        }
+
+        .fw-300 {
+            font-weight: 300;
+        }
+
+        .fw-100 {
+            font-weight: 100;
+        }
+
+        /*
+        background-position: 0 0; position位置: X軸 Y軸
+        background-position: center center; 背景圖位置置中
+        background-repeat: no-repeat; 背景圖不重複
+        background-size: cover; 背景圖尺寸填滿
+        */
+        .text-color {
+            color: #877c75;
+        }
+
+        .text-color2 {
+            color: #715e5e;
+        }
+
+        .bg-color {
+            background-color: #877c75;
+        }
+
+        .bg-cover {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* 時間軸的線 用偽元素 */
+        .time-line {
+            position: relative;
+        }
+
+        .time-line::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            /*background-color: #877c75;*/
+            /*漸層色*/
+            background-image: linear-gradient(180deg, #877c7505, #877c75);
+            /* 位移到中間，但沒有對準中最中間 */
+            left: 50%;
+            /* 用translateX(-50%)再調回來一半 */
+            transform: translateX(-50%);
+        }
+
+        /* 時間軸上的圓點 用偽元素 */
+        .time-line-point {
+            position: relative;
+        }
+
+        .time-line-point::before {
+            position: absolute;
+            content: "";
+            top: 50%;
+            width: 15px;
+            height: 15px;
+            /* 中空圓形，用白色底色跟線條組合 */
+            background-color: #ffffff;
+            border-radius: 50%;
+            border: #877c75 solid 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 偽元素的hover要寫在before前面 */
+        .time-line-point:hover::before {
+            width: 20px;
+            height: 20px;
+            border: #877c75 solid 5px;
+        }
+
+        /* 手機版時時間軸的線和圓點要消失 */
+        @media screen and (max-width: 768px) {
+
+            .time-line::before,
+            .time-line-point::before {
+                display: none;
+            }
+        }
+
+        /*.carousel-caption {
+            文字後面黑色半透明背景色
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+
+            border-radius: 圓角
+            border-radius: 10px;
+            
+            box-shadow: X軸 Y軸 模糊度 邊框厚度
+            box-shadow: 1px 1px 10px 1px #868686;
+        }*/
+
+        .s09_text {
+            background-color: #ffffffbb;
+            border-radius: 15px;
+            color: #715e5e;
+        }
+
+        /* **重要**
+         @media : and media 響應式寫法 後面接判斷式
+         max-width: 768px 最大上限到768px，小於768px才會生效此設定
+         z-index: 10; 把文字移到最前面 最上面的圖層 */
+        @media screen and (max-width: 768px) {
+
+            .s05_text,
+            .s07_text {
+                z-index: 10;
+                background-color: rgba(0, 0, 0, 0.4);
+                margin: 15px;
+                padding: 15px;
+                border-radius: 15px;
+                color: #FFF;
+            }
+        }
+
+        /*設定s05的圖片在手機板(小於768px)時右邊有要貼齊，才不會有白線*/
+        @media screen and (max-width: 768px) {
+            .s05_img {
+                right: 0;
+            }
+
+            .s07_img {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- s01 社群icon
+        text-end 靠右對齊
+    -->
+    <section class="bg-color">
+        <div class="container">
+            <div class="text-end">
+                <a href="#"><i class="fa-brands fa-square-facebook text-white me-1 mt-3"></i></a>
+                <a href="#"><i class="fa-brands fa-square-instagram text-white me-1"></i></a>
+                <a href="#"><i class="fa-brands fa-line text-white"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- s02 選單navbar-->
+    <section class="bg-color">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-color">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <i class="fa-solid fa-mug-saucer text-light me-1"></i>
+                        <b>Coffee Project 咖啡計畫</b>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="#"><b>Home 首頁</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><b>About 關於我</b></a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <b>Coffee Menu 咖啡品項</b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-color" href="#">Coffee 現煮咖啡</a></li>
+                                    <li><a class="dropdown-item text-color" href="#">Coffee Beans 咖啡豆</a></li>
+                                    <li><a class="dropdown-item text-color" href="#">Coffee Drip Bag 咖啡濾掛包</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <form class="d-flex" role="search">
+                            <a href="#" class="btn btn-outline-light me-2" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">
+                                <i class="fa-solid fa-right-to-bracket me-1"></i>
+                                <small>Login</small></a>
+                            <a href="#" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#signupModal">
+                                <i class="fa-solid fa-user me-1"></i>
+                                <small>Register</small></a>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+
+    <!-- log in Modal 
+    class="me-auto" 把其他往右邊推，ms-auto 把其他往左邊推-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content text-color">
+                <div class="modal-header text-color">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Login 會員登入</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Account 帳號</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">password 密碼</label>
+                        <input type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal"
+                        class="me-auto text-color">還沒成為會員，去註冊</a>
+                    <button type="button" class="btn btn-outline-secondary text-color" data-bs-dismiss="modal">Cancel
+                        取消</button>
+                    <button type="button" class="btn btn-outline-secondary text-color">confirm 確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sign up Modal 
+    modal-lg modal尺寸-->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content text-color">
+                <div class="modal-header text-color">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Register 註冊會員</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h5>會員條款</h5>
+                            </div>
+                            <div>
+                                <p>1. 本平台告知事項：本平台現在或將來蒐集用戶提供之個人資料，依據我國相關個人資料保護規定及公司內部規範。</p>
+                                <p>2. 本平台提供之會員服務：<br>
+                                    用戶充分瞭解本平台提供之會員服務內容如下：<br>
+                                    (一) 會員訊息服務<br>
+                                    (二) 串連第三方網站或開發商<br>
+                                    (三) 會員互動服務<br></p>
+                                <p>3. 隱私權保護政策：用戶提供的個人資料及相關使用服務紀錄受本平台之 隱私權保護政策 規範與管理，用戶明瞭且同意該隱私權保護政策亦構成本會員規約之一部份。</p>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input">
+                                    <label for="" class="form-check-label">我同意以上所述會員規則</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Account 帳號</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">password 密碼</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">confirm password 確認密碼</label>
+                                <input type="password" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Name 姓名</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Email 電子信箱</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                        class="me-auto text-color">已經是會員了，去登入</a>
+                    <button type="button" class="btn btn-outline-secondary text-color" data-bs-dismiss="modal">Cancel
+                        取消</button>
+                    <button type="button" class="btn btn-outline-secondary text-color">confirm 確認</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- s03 幻燈片輪播carousel-->
+    <section>
+        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5"
+                    aria-label="Slide 6"></button>
+            </div>
+            <div class="carousel-inner">
+                <!-- style css特別設定(只出現在這裡所以不設在css)-->
+                <div class="carousel-item active bg-cover"
+                    style="background-image: url(images/coffee001.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee002.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee003.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee004.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee005.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+                <div class="carousel-item bg-cover" style="background-image: url(images/coffee006.jpg); height: 600px;">
+                    <div class="carousel-caption d-none d-md-block">
+                        <!--<h4>title</h4>
+                        <p>content</p>-->
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- s04 三大品項col-4*3-->
+    <section class="bg-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center p-5">
+                    <!-- fa-3x 放大3倍(數字改掉就放大幾倍)，my-3 上下(Y軸)推-->
+                    <i class="fa-solid fa-mug-hot fa-5x text-white"></i>
+                    <div class="d-none d-md-block">
+                        <h2 class="my-3 fw-500 text-white">
+                            Coffee<br />
+                            現煮咖啡</h2>
+                        <!--<p class="fw-100 text-white">content01</p>-->
+                    </div>
+                </div>
+                <div class="col-md-4 text-center p-5">
+                    <i class="fa-solid fa-bag-shopping fa-5x text-white"></i>
+                    <div class="d-none d-md-block">
+                        <h2 class="my-3 fw-500 text-white">
+                            Coffee Beans<br />
+                            咖啡豆
+                        </h2>
+                        <!--<p class="fw-100 text-white">content01</p>-->
+                    </div>
+                </div>
+                <div class="col-md-4 text-center p-5">
+                    <i class="fa-solid fa-droplet fa-5x text-white"></i>
+                    <!-- class="d-none d-md-block" 在手機板上消失在電腦版上出現-->
+                    <div class="d-none d-md-block">
+                        <h2 class="my-3 fw-500 text-white">
+                            Coffee Drip Bag<br />
+                            咖啡濾掛包
+                        </h2>
+                        <!--<p class="fw-100 text-white">content01</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s05 品牌介紹 col圖5+文7 
+    style="position: relative; 外層
+    style="position: absolute; 內層
+    mt-3 margin-top 上面推3
+    my-3 上下各推3
+-->
+    <section style="position: relative;">
+        <div class="row">
+            <!-- s05_img 設定手機板圖片右邊貼齊 -->
+            <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
+                top: 0; 
+                bottom: 0; 
+                background-image: url(images/coffee007.jpg);">
+            </div>
+        </div>
+        <div class="container text-color">
+            <!-- justify-content-end 文字區塊靠右 -->
+            <div class="row justify-content-end mt-3">
+                <!-- s05_text 設定手機板文字要在圖片上面-->
+                <div class="col-md-7 s05_text">
+                    <h4 class="fw-700">Coffee Project 品牌介紹</h4>
+                    <p>咖啡，就是這麼重要。喝咖啡是許多人每天早上第一件要做的事，咖啡的香氣和味道，總是能讓人心情愉悅，提神醒腦。咖啡計畫是一家專注於咖啡文化的咖啡店。我們為您帶來最優質的咖啡豆，並通過經驗豐富的咖啡師，以最完美的方式為您製作一杯杯美味的咖啡。
+                    </p>
+                    <a href="#" class="btn btn-outline-secondary text-color">more</a>
+                    <div class="row my-3">
+                        <div class="col-md-6">
+                            <h4 class="fw-700">Coffee Project 品牌主理人</h4>
+                            <p>作為一家咖啡文化的推廣者，我們相信咖啡不僅僅是一種飲品，更是生活的一種態度。在這裡，您可以和朋友一同品嚐咖啡，聊天交流；也可以獨自一人，靜靜地享受一杯咖啡，感受生活的美好。
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="fw-700">Coffee Project 冠軍咖啡師</h4>
+                            <p>我們的咖啡師都是專業的，擁有豐富的咖啡製作經驗。他們不僅精通咖啡的烘焙和磨豆技術，還能夠根據不同的咖啡豆和口味要求，精確地掌握萃取時間和比例，為您帶來最完美的一杯咖啡。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s06 服務介紹
+    class="display-1" 大標題用
+    me-3 往右邊推3 
+    d-flex -->
+    <section>
+        <div class="container text-color my-3">
+            <div class="display-5 text-center text-color2 fw-900 mb-3">服務介紹</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-mug-hot fa-4x me-3"></i>
+                        <div>
+                            <h3 class="fw-700">現煮咖啡</h3>
+                            <p>我們的咖啡豆都是經過精密烘焙的，以確保每一顆咖啡豆的風味和口感都能夠完美地展現在您的杯中。咖啡製作過程採用嚴格的標準和程序，確保每一杯咖啡都能夠保持一致的品質和口感。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-bag-shopping fa-4x me-3"></i>
+                        <div>
+                            <h3 class="fw-700">咖啡豆</h3>
+                            <p>咖啡豆的品質，決定了咖啡的味道和風味。因此，我們的咖啡豆都是經過嚴格挑選的，來自世界各地最好的咖啡種植區。我們的咖啡豆種類繁多，包括哥倫比亞、肯亞、巴西、印尼等。不同的咖啡豆，帶來不同的風味和口感，滿足您的各種口味需求。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-droplet fa-4x me-3"></i>
+                        <div class="ms-2">
+                            <h3 class="fw-700">咖啡濾掛包</h3>
+                            <p>除了咖啡，我們還提供販售自家烘焙的咖啡豆及咖啡濾掛包，讓您在品嚐美味的同時，還能將好咖啡分享給親朋好友，愉悅地度過每一刻時光。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-cart-arrow-down fa-3x me-3"></i>
+                        <div>
+                            <h3 class="fw-700">線上預訂</h3>
+                            <p>除了到店選購咖啡豆及咖啡濾掛包之外，我們還供了線上預訂的方式，讓您可以預先訂購喜歡的咖啡商品，以免現場向隅。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s07 付款方式 搭配圖片 -->
+    <section style="position: relative;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 s07_text text-color2 mt-3">
+                    <dl class="row">
+                        <h3 class="fw-700 mb-3">現場付款 & 線上預訂</h3>
+                        <dt class="col-sm-3">現金</dt>
+                        <dd class="col-sm-9">現場付款除了台幣之外，接受部分外幣，例如：美金、日幣。</dd>
+                        <dt class="col-sm-3">信用卡</dt>
+                        <dd class="col-sm-9">現場付款接受台灣以及海外發行的信用卡。</dd>
+                        <dt class="col-sm-3">行動支付</dt>
+                        <dd class="col-sm-9">
+                            現場付款接受的行動支付種類有：<br />
+                            apple pay<br />
+                            google pay<br />
+                            line pay<br />
+                            台灣pay···等各種行動支付，請現場確認。
+                        </dd>
+                        <dt class="col-sm-3">轉帳匯款</dt>
+                        <dd class="col-sm-9">
+                            目前線上預訂預先付款僅提供轉帳匯款方式，若要選擇其他付款方式請至店面付款。</dd>
+                        <!--
+                        <dt class="col-sm-3 text-truncate">創立的緣由</dt>
+                        <dd class="col-sm-9">
+                            <dl class="row">
+                                <dt class="col-sm-4">Nested definition list</dt>
+                                <dd class="col-sm-8">內容內容內容內容內容內容內容內容內容內容內容</dd>
+                            </dl>
+                        </dd>
+                        -->
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <!--justify-content-end 圖片區塊靠右-->
+        <div class="row justify-content-end">
+            <div class="col-md-5 bg-cover s07_img" style="position: absolute;
+            background-image: url(images/coffee008.jpg);
+            top: 0; 
+            bottom: 0;
+            right: 0;"></div>
+        </div>
+    </section>
+
+    <!-- s08 google地圖 & 線上預訂表單 -->
+    <section>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14559.18077940822!2d120.59025416842438!3d24.178914429388207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693e1e5070a7a7%3A0xa462167a0845084d!2z6Lev5oCd576p5pWZ5aCC!5e0!3m2!1szh-TW!2stw!4v1692234812196!5m2!1szh-TW!2stw"
+                        width="100%" height="700" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-md-6 text-color ps-4 py-3">
+                    <h3 class="fw-700 text-color2 text-nowrap mb-3">Coffee Project 線上預訂表單</h3>
+                    <div class="mb-2">
+                        <label for="" class="form-label">姓名</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">電話</label>
+                        <input type="phone" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">email</label>
+                        <input type="email" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">品牌咖啡豆100g．數量：</label>
+                        <input type="number" class="form-control" min="0" max="10">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">品牌咖啡豆200g．數量：</label>
+                        <input type="number" class="form-control" min="0" max="10">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">品牌咖啡濾掛包5入．數量：</label>
+                        <input type="number" class="form-control" min="0" max="10">
+                    </div>
+                    <div class="mb-2">
+                        <label for="" class="form-label">品牌咖啡濾掛包10入．數量：</label>
+                        <input type="number" class="form-control" min="0" max="10">
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">現場支付：現金付款/信用卡/行動支付</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                        <label class="form-check-label" for="flexRadioDefault2">轉帳匯款</label>
+                    </div>
+                    <div class="text-end">
+                        <a href="#" class="btn btn-outline-secondary text-color">取消</a>
+                        <a href="#" class="btn btn-outline-secondary text-color">確認</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s09 最新消息 徵人訊息 -->
+    <section class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-6 bg-cover" style="background-image: url(images/coffee009.jpg);">
+                <div class="row justify-content-center p-3">
+                    <div class="col-md-9 s09_text p-3">
+                        <small class="badge bg-color mb-3">Coffee Project NEWS 最新消息</small>
+                        <h4 class="fw-700">2023品牌新配方豆</h4>
+                        <p class="fw-700 py-2">
+                            咖啡計畫2023年度最新調配比例的品牌配方豆正式開始販售，相比以往品牌咖啡豆有著更好的口感與香氣，如果您感到有興趣，詳情請洽詢咖啡計畫工作人員。
+                        </p>
+                        <a href="#" class="btn btn-outline-light text-color">more</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 bg-cover" style="background-image: url(images/coffee010.jpg);">
+                <div class="row justify-content-center p-3">
+                    <div class="col-md-9 s09_text p-3">
+                        <small class="badge bg-color mb-3">JOIN Coffee Project 加入我們</small>
+                        <h4 class="fw-700">咖啡師數名</h4>
+                        <p class="fw-700 py-2">
+                            您擁有專業豐富的咖啡製作經驗嗎？您不僅精通咖啡的烘焙和磨豆技術，還能夠根據不同的咖啡豆和口味要求，精確地掌握萃取時間和比例嗎？如果您樂於專注的給大家帶來最完美的一杯咖啡，歡迎您加入咖啡計畫。
+                        </p>
+                        <a href="#" class="btn btn-outline-light text-color">more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s12 計數器 -->
+    <section class="py-5" style="position: relative;">
+        <div class="row">
+            <!-- s05_img 設定手機板圖片右邊貼齊 -->
+            <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
+                top: 0; 
+                bottom: 0; 
+                background-image: url(images/coffee011.jpg);">
+            </div>
+        </div>
+        <div class="container text-color">
+            <div class="row justify-content-end mt-3">
+                <div class="col-md-7 s05_text py-5">
+                    <div class="row">
+                        <div class="col-4 text-center">
+                            <h5>咖啡香氣</h5>
+                            <h1 class="fw-700 counter01">99</h1>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h5>座位舒適</h5>
+                            <h1 class="fw-700 counter02">99</h1>
+                        </div>
+                        <div class="col-4 text-center">
+                            <h5>專業認證</h5>
+                            <h1 class="fw-700 counter03">99</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+        s11 時間軸 Z字形排版 
+        img-fluid 圖片100%
+        align-items-center :bootstrap本身有flex可以直接下
+        flex-row-reverse :反向從右邊排序回來
+    -->
+    <section>
+        <div class="container p-5">
+            <h4 class="fw-700 text-center text-color2 pb-3">
+                Coffee Project 咖啡計畫品牌沿革
+            </h4>
+            <div class="time-line">
+                <div class="row align-items-center time-line-point">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2023</h4>
+                            <p>NOW</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee012.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2022</h4>
+                            <p>咖啡計畫品牌第5間店面落成</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee013.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center time-line-point">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2020</h4>
+                            <p>咖啡計畫品牌第3間店面落成</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee014.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2016</h4>
+                            <p>咖啡計畫品牌第2間店面落成</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee015.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center time-line-point">
+                    <div class="col-md-6 text-center text-color">
+                        <div class="mytext">
+                            <h4 class="fw-700">2012</h4>
+                            <p>咖啡計畫品牌第1間店面落成</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee016.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-center flex-row-reverse time-line-point">
+                    <div class="col-md-6 text-center text-color2">
+                        <div class="mytext">
+                            <h4 class="fw-700">2010</h4>
+                            <p>咖啡計畫品牌成立</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="myimage bg-cover rounded-5"
+                            style="background-image: url(images/coffee017.jpg); height: 200px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- s10 版權宣告 友善連結 -->
+    <section>
+        <div class="container-fluid bg-color py-1">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link disabled text-white">
+                        <small>Copyright 2023 Coffee Project 咖啡計畫 All Rights Reserved.</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">
+                        <i class="fa-brands fa-square-facebook text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-brands fa-square-instagram text-white"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-brands fa-line text-white"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- codepen計數器程式 -->
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+    <script>
+        const counterUp = window.counterUp.default
+
+        const callback = entries => {
+            entries.forEach(entry => {
+                const el = entry.target
+                if (entry.isIntersecting && !el.classList.contains('is-visible')) {
+                    counterUp(el, {
+                        // 運行時間和延遲時間
+                        duration: 2000,
+                        delay: 10,
+                    })
+                    el.classList.add('is-visible')
+                }
+            })
+        }
+
+        const IO = new IntersectionObserver(callback, { threshold: 1 })
+
+        // querySelector 把counter抓進來
+        // el = counter
+        //const el = document.querySelector('.counter') 改成3個同時控制3個
+        const el01 = document.querySelector('.counter01')
+        IO.observe(el01)
+        const el02 = document.querySelector('.counter02')
+        IO.observe(el02)
+        const el03 = document.querySelector('.counter03')
+        IO.observe(el03)
+    </script>
+    <!-- codepen計數器程式 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
