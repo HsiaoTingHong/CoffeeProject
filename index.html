@@ -16,13 +16,10 @@
         /*google font*/
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
 
-        /*google font套用至body(整個網頁都使用字形)*/
         .body {
             font-family: 'Noto Sans TC', sans-serif;
         }
 
-        /*自行設定class 例如 .fw-500字體厚度設定500
-        可以另存css檔案就可跟全部檔案共用*/
         .fw-900 {
             font-weight: 900;
         }
@@ -47,13 +44,6 @@
             font-weight: 100;
         }
 
-        /*
-        background-position: 0 0; position位置: X軸 Y軸
-        background-position: center center; 背景圖位置置中
-        background-repeat: no-repeat; 背景圖不重複
-        background-size: cover; 背景圖尺寸填滿
-        */
-
         .footer-text {
             font-size: 13px;
         }
@@ -70,13 +60,14 @@
             background-color: #877c75;
         }
 
+        /* 背景圖片 */
         .bg-cover {
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
-        /* 時間軸的線 用偽元素 */
+        /* 時間軸的線 */
         .time-line {
             position: relative;
         }
@@ -87,16 +78,12 @@
             top: 0;
             bottom: 0;
             width: 5px;
-            /*background-color: #877c75;*/
-            /*漸層色*/
             background-image: linear-gradient(180deg, #877c75, #877c7505);
-            /* 位移到中間，但沒有對準中最中間 */
             left: 50%;
-            /* 用translateX(-50%)再調回來一半 */
             transform: translateX(-50%);
         }
 
-        /* 時間軸上的圓點 用偽元素 */
+        /* 時間軸上的圓點 */
         .time-line-point {
             position: relative;
         }
@@ -107,7 +94,6 @@
             top: 50%;
             width: 15px;
             height: 15px;
-            /* 中空圓形，用白色底色跟線條組合 */
             background-color: #ffffff;
             border-radius: 50%;
             border: #877c75 solid 3px;
@@ -115,45 +101,25 @@
             transform: translateX(-50%);
         }
 
-        /* 偽元素的hover要寫在before前面 */
         .time-line-point:hover::before {
             width: 20px;
             height: 20px;
             border: #877c75 solid 5px;
         }
 
-        /* 手機版時時間軸的線和圓點要消失 */
+        .s09_text {
+                background-color: #ffffffb0;
+                border-radius: 15px;
+                color: #715e5e;
+            }
+
+        /* media */
         @media screen and (max-width: 768px) {
 
             .time-line::before,
             .time-line-point::before {
                 display: none;
-            }
-        }
-
-        /*.carousel-caption {
-            文字後面黑色半透明背景色
-            background-color: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-
-            border-radius: 圓角
-            border-radius: 10px;
-            
-            box-shadow: X軸 Y軸 模糊度 邊框厚度
-            box-shadow: 1px 1px 10px 1px #868686;
-        }*/
-
-        .s09_text {
-            background-color: #ffffffb0;
-            border-radius: 15px;
-            color: #715e5e;
-        }
-
-        /* **重要**
-         @media : and media 響應式寫法 後面接判斷式
-         max-width: 768px 最大上限到768px，小於768px才會生效此設定
-         z-index: 10; 把文字移到最前面 最上面的圖層 */
-        @media screen and (max-width: 768px) {
+            }            
 
             .s05_text {
                 z-index: 10;
@@ -174,10 +140,7 @@
                 color: #FFF;
                 transform: translateX(-5%);
             }
-        }
 
-        /*設定s05的圖片在手機板(小於768px)時右邊有要貼齊，才不會有白線*/
-        @media screen and (max-width: 768px) {
             .s05_img {
                 right: 0;
             }
@@ -190,9 +153,7 @@
 </head>
 
 <body>
-    <!-- s01 社群icon
-        text-end 靠右對齊
-    -->
+    <!-- icon -->
     <section class="bg-color">
         <div class="container">
             <div class="text-end">
@@ -203,7 +164,7 @@
         </div>
     </section>
 
-    <!-- s02 選單navbar-->
+    <!-- navbar -->
     <section class="bg-color">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-color">
@@ -253,8 +214,7 @@
         </div>
     </section>
 
-    <!-- log in Modal 
-    class="me-auto" 把其他往右邊推，ms-auto 把其他往左邊推-->
+    <!-- log in Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content text-color">
@@ -283,8 +243,7 @@
         </div>
     </div>
 
-    <!-- sign up Modal 
-    modal-lg modal尺寸-->
+    <!-- sign up Modal -->
     <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content text-color">
@@ -347,7 +306,7 @@
         </div>
     </div>
 
-    <!-- s03 幻燈片輪播carousel-->
+    <!-- carousel -->
     <section>
         <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
@@ -365,42 +324,29 @@
                     aria-label="Slide 6"></button>
             </div>
             <div class="carousel-inner">
-                <!-- style css特別設定(只出現在這裡所以不設在css)-->
                 <div class="carousel-item active bg-cover"
                     style="background-image: url(images/coffee001.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
                 <div class="carousel-item bg-cover" style="background-image: url(images/coffee002.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
                 <div class="carousel-item bg-cover" style="background-image: url(images/coffee003.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
                 <div class="carousel-item bg-cover" style="background-image: url(images/coffee004.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
                 <div class="carousel-item bg-cover" style="background-image: url(images/coffee005.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
                 <div class="carousel-item bg-cover" style="background-image: url(images/coffee006.jpg); height: 90vh;">
                     <div class="carousel-caption d-none d-md-block">
-                        <!--<h4>title</h4>
-                        <p>content</p>-->
                     </div>
                 </div>
 
@@ -418,18 +364,16 @@
         </div>
     </section>
 
-    <!-- s04 三大品項col-4*3-->
+    <!-- col-4*3 -->
     <section class="bg-color">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center text-nowrap p-5">
-                    <!-- fa-3x 放大3倍(數字改掉就放大幾倍)，my-3 上下(Y軸)推-->
                     <i class="fa-solid fa-mug-hot fa-5x text-white ps-3"></i>
                     <div class="d-none d-md-block">
                         <h2 class="my-3 fw-500 text-white">
                             Coffee<br />
                             現煮咖啡</h2>
-                        <!--<p class="fw-100 text-white">content01</p>-->
                     </div>
                 </div>
                 <div class="col-md-4 text-center p-5">
@@ -439,33 +383,24 @@
                             Coffee Beans<br />
                             咖啡豆
                         </h2>
-                        <!--<p class="fw-100 text-white">content01</p>-->
                     </div>
                 </div>
                 <div class="col-md-4 text-center p-5">
                     <i class="fa-solid fa-droplet fa-5x text-white"></i>
-                    <!-- class="d-none d-md-block" 在手機板上消失在電腦版上出現-->
                     <div class="d-none d-md-block">
                         <h2 class="my-3 fw-500 text-white">
                             Coffee Drip Bag<br />
                             咖啡濾掛包
                         </h2>
-                        <!--<p class="fw-100 text-white">content01</p>-->
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- s05 品牌介紹 col圖5+文7 
-    style="position: relative; 外層
-    style="position: absolute; 內層
-    mt-3 margin-top 上面推3
-    my-3 上下各推3
--->
+    <!-- col圖5+文7 -->
     <section class="container-fluid" style="position: relative;">
         <div class="row">
-            <!-- s05_img 設定手機板圖片右邊貼齊 -->
             <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
                 top: 0; 
                 bottom: 0; 
@@ -473,9 +408,7 @@
             </div>
         </div>
         <div class="container text-color">
-            <!-- justify-content-end 文字區塊靠右 -->
             <div class="row justify-content-end p-3">
-                <!-- s05_text 設定手機板文字要在圖片上面-->
                 <div class="col-md-7 s05_text">
                     <h4 class="fw-700">Coffee Project 品牌介紹</h4>
                     <p>咖啡，就是這麼重要。喝咖啡是許多人每天早上第一件要做的事，咖啡的香氣和味道，總是能讓人心情愉悅，提神醒腦。咖啡計畫是一家專注於咖啡文化的咖啡店。我們為您帶來最優質的咖啡豆，並通過經驗豐富的咖啡師，以最完美的方式為您製作一杯杯美味的咖啡。
@@ -497,10 +430,7 @@
         </div>
     </section>
 
-    <!-- s06 服務介紹
-    class="display-1" 大標題用
-    me-3 往右邊推3 
-    d-flex -->
+    <!-- col-md-6*4 -->
     <section>
         <div class="container text-color px-4 py-3">
             <div class="display-5 text-center text-color2 fw-900 mb-3">服務介紹</div>
@@ -551,7 +481,7 @@
         </div>
     </section>
 
-    <!-- s07 付款方式 搭配圖片 -->
+    <!-- col圖5+文7 -->
     <section class="container-fluid" style="position: relative;">
         <div class="container">
             <div class="row p-3">
@@ -573,20 +503,10 @@
                         <dt class="col-sm-3 text-nowrap">．轉帳匯款</dt>
                         <dd class="col-sm-9">
                             目前線上預訂預先付款僅提供轉帳匯款方式，若要選擇其他付款方式請至店面付款。</dd>
-                        <!--
-                        <dt class="col-sm-3 text-truncate">創立的緣由</dt>
-                        <dd class="col-sm-9">
-                            <dl class="row">
-                                <dt class="col-sm-4">Nested definition list</dt>
-                                <dd class="col-sm-8">內容內容內容內容內容內容內容內容內容內容內容</dd>
-                            </dl>
-                        </dd>
-                        -->
                     </dl>
                 </div>
             </div>
         </div>
-        <!--justify-content-end 圖片區塊靠右-->
         <div class="row justify-content-end">
             <div class="col-md-5 bg-cover s07_img" style="position: absolute;
             background-image: url(images/coffee008.jpg);
@@ -596,7 +516,7 @@
         </div>
     </section>
 
-    <!-- s08 google地圖 & 線上預訂表單 -->
+    <!-- google地圖 & 表單 -->
     <section>
         <div class="container">
             <div class="row mt-3 align-items-center">
@@ -650,10 +570,9 @@
         </div>
     </section>
 
-    <!-- s12 計數器 -->
+    <!-- 計數器 -->
     <section class="container-fluid py-4" style="position: relative;">
         <div class="row">
-            <!-- s05_img 設定手機板圖片右邊貼齊 -->
             <div class="col-md-5 bg-cover s05_img" style="position: absolute; 
                 top: 0; 
                 bottom: 0; 
@@ -682,12 +601,7 @@
         </div>
     </section>
 
-    <!-- 
-        s11 時間軸 Z字形排版 
-        img-fluid 圖片100%
-        align-items-center :bootstrap本身有flex可以直接下
-        flex-row-reverse :反向從右邊排序回來
-    -->
+    <!-- 時間軸 -->
     <section>
         <div class="container p-5">
             <h4 class="fw-700 text-center text-color2 pb-4">
@@ -777,7 +691,7 @@
         </div>
     </section>
 
-    <!-- s09 最新消息 徵人訊息 -->
+    <!-- 最新消息 徵人訊息 -->
     <section class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-6 bg-cover" style="background-image: url(images/coffee009.jpg);">
@@ -807,7 +721,7 @@
         </div>
     </section>
 
-    <!-- s10 版權宣告 友善連結 -->
+    <!-- 版權宣告 友善連結 -->
     <section>
         <div class="container-fluid bg-color p-3">
             <ul class="nav justify-content-center align-items-center">
@@ -835,11 +749,10 @@
         </div>
     </section>
 
-    <!-- codepen計數器程式 -->
+    <!-- 計數器程式 -->
     <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
     <script>
         const counterUp = window.counterUp.default
-
         const callback = entries => {
             entries.forEach(entry => {
                 const el = entry.target
@@ -853,12 +766,7 @@
                 }
             })
         }
-
         const IO = new IntersectionObserver(callback, { threshold: 1 })
-
-        // querySelector 把counter抓進來
-        // el = counter
-        //const el = document.querySelector('.counter') 改成3個同時控制3個
         const el01 = document.querySelector('.counter01')
         IO.observe(el01)
         const el02 = document.querySelector('.counter02')
@@ -866,7 +774,6 @@
         const el03 = document.querySelector('.counter03')
         IO.observe(el03)
     </script>
-    <!-- codepen計數器程式 -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
