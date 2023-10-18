@@ -1,5 +1,5 @@
 # Coffee Project
-## 簡介
+## 作品說明
 Single Page一頁式網頁 <br>
 RWD響應式網頁 <br>
 <br>
