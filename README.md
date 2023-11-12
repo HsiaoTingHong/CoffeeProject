@@ -1,4 +1,7 @@
 # Coffee Project
+![image](https://github.com/HsiaoTingHong/CoffeeProject/assets/139849443/bb202b96-2f88-4bfc-9c90-858e4f1a1a4a)
+<br/>
+
 ## 作品說明
 Single Page一頁式網頁 <br>
 RWD響應式網頁 <br>
